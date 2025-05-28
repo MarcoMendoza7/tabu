@@ -9,6 +9,20 @@
     <div class="container">
         <h1>Búsqueda Tabú para TSP</h1>
         <form method="POST">
+            <label for="origin">Ciudad de Origen:</label>
+            <select name="origin" required>
+                {% for city in city_names %}
+                    <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="destination">Ciudad de Destino:</label>
+            <select name="destination" required>
+                {% for city in city_names %}
+                    <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select>
+
             <label for="temp_ini">Temperatura Inicial:</label>
             <input type="number" step="any" name="temp_ini" required>
 

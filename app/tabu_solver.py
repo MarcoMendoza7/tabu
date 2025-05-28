@@ -25,7 +25,7 @@ def total_distance(route):
     dist += euclidean(coordinates[route[-1]], coordinates[route[0]])  # Regresa al inicio
     return dist
 
-def tabu_search(temp_ini, temp_min, tabu_size):
+def tabu_search(temp_ini, temp_min, tabu_size, origin_index, destination_index):
     current = random.sample(range(len(cities)), len(cities))  # Ruta inicial aleatoria
     best = current[:]
     best_cost = total_distance(best)
@@ -51,8 +51,16 @@ def tabu_search(temp_ini, temp_min, tabu_size):
             tabu_list.pop(0)
 
         current = next_route
-        T *= 0.99  # Enfriamiento más lento para mayor exploración
+        T *= 0.99
 
         print(f"Iteración con T={T:.2f} | Mejor ruta hasta ahora: {best} | Distancia: {best_cost:.2f}")
+
+    # Ajustar la ruta para que empiece en origen y termine en destino
+    if origin_index in best and destination_index in best:
+        while best[0] != origin_index:
+            best = best[1:] + [best[0]]  # Rotar inicio
+
+        if best[-1] != destination_index:
+            best.append(destination_index)  # Asegurar que termine en destino
 
     return best, best_cost
