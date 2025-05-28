@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Optimización con Búsqueda Tabú</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Búsqueda Tabú para TSP</h1>
+        <form method="POST">
+            <label for="temp_ini">Temperatura Inicial:</label>
+            <input type="number" step="any" name="temp_ini" required>
+
+            <label for="temp_min">Temperatura Mínima:</label>
+            <input type="number" step="any" name="temp_min" required>
+
+            <label for="speed">Tamaño de Lista Tabú:</label>
+            <input type="number" name="speed" required>
+
+            <button type="submit">Optimizar Ruta</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>Resultado:</h2>
+            <p><strong>Ruta Optimizada:</strong> {{ result.ruta_optimizada }}</p>
+            <p><strong>Distancia Total:</strong> {{ result.distancia }} unidades</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
